@@ -1,0 +1,529 @@
+/* ==========================================================================
+   style.css
+   Custom layer that sits on top of Tailwind's utility classes.
+   Covers: smooth-scroll plumbing, reveal/mask animations, custom cursor,
+   the blueprint/drafting motif, magnetic skill rows, and the ledger grid.
+   ========================================================================== */
+
+:root {
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --nav-h: 0px;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+::selection { background: #D4C5B9; color: #111112; }
+
+/* --------------------------------------------------------------------------
+   Smooth-scroll plumbing
+   #smooth-content is translated by JS to fake an eased scroll.
+   #scroll-spacer is a same-height invisible block kept in normal flow so the
+   browser still produces a real, native, accessible scrollbar.
+   -------------------------------------------------------------------------- */
+#smooth-content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  will-change: transform;
+}
+
+#scroll-spacer {
+  width: 1px;
+  pointer-events: none;
+}
+
+/* Fallback: if JS hasn't initialised yet (or is disabled), content scrolls natively. */
+html:not(.js-smooth-ready) #smooth-content {
+  position: static;
+}
+html:not(.js-smooth-ready) #scroll-spacer {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #smooth-content { position: static !important; transform: none !important; }
+  #scroll-spacer { display: none !important; }
+}
+
+/* --------------------------------------------------------------------------
+   Scroll progress hairline
+   -------------------------------------------------------------------------- */
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: #D4C5B9;
+  z-index: 60;
+  transform-origin: left;
+  transition: width 0.1s linear;
+}
+
+/* --------------------------------------------------------------------------
+   Floating nav
+   -------------------------------------------------------------------------- */
+.nav-shell {
+  background: rgba(17, 17, 18, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.5s var(--ease-out-expo), background-color 0.4s ease, border-color 0.4s ease;
+}
+[data-nav].nav-hidden { transform: translateY(-130%); }
+[data-nav].nav-solid .nav-shell { background: rgba(17, 17, 18, 0.86); border-color: rgba(255,255,255,0.12); }
+
+.nav-link {
+  position: relative;
+  padding: 0.5rem 0.85rem;
+  border-radius: 999px;
+  transition: color 0.3s ease;
+}
+.nav-link:hover { color: #fff; }
+.nav-link.is-active { color: #D4C5B9; }
+.nav-link.is-active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0.2rem;
+  width: 3px; height: 3px;
+  background: #D4C5B9;
+  border-radius: 999px;
+  transform: translateX(-50%);
+}
+
+/* Mobile menu */
+.mobile-menu {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-12px);
+  transition: opacity 0.45s var(--ease-out-expo), transform 0.45s var(--ease-out-expo), visibility 0.45s;
+}
+.mobile-menu.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.mobile-link {
+  display: inline-block;
+  color: #fff;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.mobile-link:hover { color: #D4C5B9; transform: translateX(0.35rem); }
+
+.burger { position: relative; display: block; width: 16px; height: 10px; }
+.burger span {
+  position: absolute; left: 0; width: 100%; height: 1px; background: currentColor;
+  transition: transform 0.35s var(--ease-out-expo), opacity 0.3s ease, top 0.35s var(--ease-out-expo);
+}
+.burger span:first-child { top: 0; }
+.burger span:last-child { top: 9px; }
+[aria-expanded="true"] .burger span:first-child { top: 4.5px; transform: rotate(45deg); }
+[aria-expanded="true"] .burger span:last-child { top: 4.5px; transform: rotate(-45deg); }
+
+/* --------------------------------------------------------------------------
+   Typography helpers
+   -------------------------------------------------------------------------- */
+.overline {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* --------------------------------------------------------------------------
+   Reveal system
+   .reveal-row        → translateY + opacity entrance (rows, paragraphs, ctas)
+   .reveal-mask/.inner → clip-mask line reveal for big display type
+   Both are driven by the .is-visible class toggled via IntersectionObserver
+   (or immediately on load for above-the-fold hero lines).
+   -------------------------------------------------------------------------- */
+.reveal-row {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal-row.is-visible { opacity: 1; transform: translateY(0); }
+
+.reveal-inner {
+  transform: translateY(112%);
+  transition: transform 0.95s var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal-mask.is-visible .reveal-inner,
+.reveal-inner.is-visible { transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-row, .reveal-inner { transition: none !important; opacity: 1 !important; transform: none !important; }
+}
+
+/* --------------------------------------------------------------------------
+   Blueprint / drafting grid texture — the site's signature motif
+   -------------------------------------------------------------------------- */
+.bp-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(212, 197, 185, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 197, 185, 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 40%, transparent 85%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 40%, transparent 85%);
+}
+.bp-grid--cell {
+  background-size: 28px 28px;
+  -webkit-mask-image: none;
+  mask-image: none;
+  opacity: 0.5;
+}
+
+/* Corner registration ticks (the recurring "drafting crosshair" signature) */
+.corner-tick {
+  position: absolute;
+  width: 18px; height: 18px;
+  border-color: #D4C5B9;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.6s var(--ease-out-expo) 0.3s, transform 0.6s var(--ease-out-expo) 0.3s;
+}
+.is-visible .corner-tick,
+.reveal-row.is-visible .corner-tick { opacity: 0.85; transform: scale(1); }
+.corner-tick.tl { top: -1px; left: -1px; border-top: 1.5px solid; border-left: 1.5px solid; }
+.corner-tick.tr { top: -1px; right: -1px; border-top: 1.5px solid; border-right: 1.5px solid; }
+.corner-tick.bl { bottom: -1px; left: -1px; border-bottom: 1.5px solid; border-left: 1.5px solid; }
+.corner-tick.br { bottom: -1px; right: -1px; border-bottom: 1.5px solid; border-right: 1.5px solid; }
+
+/* --------------------------------------------------------------------------
+   Media frame (hero portrait + thesis preview) with graceful image fallback
+   -------------------------------------------------------------------------- */
+.media-frame {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(212, 197, 185, 0.25);
+  background: linear-gradient(155deg, #1d2520 0%, #15201b 55%, #1a1a1c 100%);
+}
+.media-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.85) sepia(0.18) contrast(1.05) brightness(0.92);
+  transform: scale(1.04);
+  transition: transform 1.4s var(--ease-out-expo), opacity 0.5s ease;
+}
+.media-img--sketch { filter: grayscale(1) sepia(0.28) contrast(1.08) brightness(0.95); }
+.ledger-cell--visual:hover .media-img,
+.media-frame:hover .media-img { transform: scale(1.1); }
+
+.media-img--failed { opacity: 0; }
+[data-img-fallback]::after {
+  content: "Replace with final photography";
+  position: absolute;
+  inset: auto 1rem 1rem auto;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(212, 197, 185, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+[data-img-fallback]:has(.media-img--failed)::after { opacity: 1; }
+
+/* --------------------------------------------------------------------------
+   Scroll cue (hero)
+   -------------------------------------------------------------------------- */
+.scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 2.25rem;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+.scroll-cue-line {
+  width: 1px; height: 38px;
+  background: linear-gradient(to bottom, rgba(212,197,185,0.05), #D4C5B9 60%, rgba(212,197,185,0.05));
+  position: relative;
+  overflow: hidden;
+}
+.scroll-cue-line::after {
+  content: "";
+  position: absolute;
+  left: 0; top: -100%;
+  width: 100%; height: 100%;
+  background: #111112;
+  animation: scroll-cue-sweep 2.2s var(--ease-soft) infinite;
+}
+@keyframes scroll-cue-sweep {
+  0% { top: -100%; }
+  60%, 100% { top: 100%; }
+}
+
+/* --------------------------------------------------------------------------
+   Primary button
+   -------------------------------------------------------------------------- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.4rem;
+  border-radius: 999px;
+  background: #D4C5B9;
+  color: #111112;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  transition: background-color 0.35s var(--ease-out-expo), transform 0.35s var(--ease-out-expo), box-shadow 0.35s ease;
+  width: fit-content;
+}
+.btn-primary:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 12px 30px -8px rgba(212,197,185,0.35); }
+
+/* --------------------------------------------------------------------------
+   Skills matrix (magnetic, staggered rows)
+   -------------------------------------------------------------------------- */
+.skill-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.5rem 1fr auto 1.5rem;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.6rem 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  overflow: hidden;
+  transition: padding-left 0.5s var(--ease-out-expo);
+}
+.skill-row::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), rgba(212, 197, 185, 0.14), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.skill-row:hover::before { opacity: 1; }
+.skill-row:hover { padding-left: 1.25rem; }
+
+.skill-index {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  color: #D4C5B9;
+  letter-spacing: 0.1em;
+}
+.skill-name {
+  font-family: "Fraunces", serif;
+  font-size: clamp(1.35rem, 2.6vw, 2.25rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  transition: transform 0.5s var(--ease-out-expo), color 0.4s ease;
+}
+.skill-row:hover .skill-name { transform: translateX(calc(6px + var(--magnetic-x, 0px))); color: #fff; }
+.skill-tags {
+  display: none;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: right;
+}
+.skill-arrow {
+  justify-self: end;
+  color: #D4C5B9;
+  opacity: 0;
+  transform: translate(-6px, 6px) rotate(-20deg);
+  transition: opacity 0.45s var(--ease-out-expo), transform 0.45s var(--ease-out-expo);
+}
+.skill-row:hover .skill-arrow { opacity: 1; transform: translate(0,0) rotate(0deg); }
+
+@media (min-width: 768px) {
+  .skill-tags { display: block; }
+}
+
+/* --------------------------------------------------------------------------
+   Project ledger grid
+   -------------------------------------------------------------------------- */
+.ledger-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+}
+@media (min-width: 860px) {
+  .ledger-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.ledger-cell {
+  position: relative;
+  min-height: 360px;
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+}
+
+.ledger-cell--visual { display: flex; }
+.ledger-cell--visual .media-frame { position: absolute; inset: 0; border: none; }
+.ledger-overlay {
+  position: relative;
+  z-index: 10;
+  margin-top: auto;
+  width: 100%;
+  padding: 1.75rem 1.5rem;
+  background: linear-gradient(to top, rgba(17,17,18,0.96) 35%, rgba(17,17,18,0.55) 75%, transparent 100%);
+}
+
+.ledger-cell--data {
+  padding: 2rem 1.75rem;
+  background: #111112;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.ledger-overlay--data {
+  padding: 0;
+  background: none;
+  margin-top: 1.75rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.45s var(--ease-out-expo), transform 0.45s var(--ease-out-expo);
+}
+.ledger-cell--data:hover .ledger-overlay--data,
+.ledger-cell--data:focus-within .ledger-overlay--data { opacity: 1; transform: translateY(0); }
+
+.data-sheet { display: flex; flex-direction: column; gap: 0.85rem; }
+.data-sheet > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
+}
+.data-sheet dt {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.45);
+  white-space: nowrap;
+}
+.data-sheet dd {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12.5px;
+  color: #fff;
+  text-align: right;
+}
+
+.ledger-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.15rem;
+  border-radius: 999px;
+  background: #D4C5B9;
+  color: #111112;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  transition: background-color 0.3s ease, transform 0.3s var(--ease-out-expo), gap 0.3s ease;
+}
+.ledger-pill:hover { background: #fff; gap: 0.7rem; transform: translateY(-1px); }
+
+.ledger-cell--visual:hover .ledger-overlay { background: linear-gradient(to top, rgba(17,17,18,0.97) 45%, rgba(17,17,18,0.65) 80%, transparent 100%); }
+
+.ledger-cell--visual .ledger-overlay .ledger-pill {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s var(--ease-out-expo), transform 0.4s var(--ease-out-expo);
+}
+.ledger-cell--visual:hover .ledger-overlay .ledger-pill,
+.ledger-cell--visual:focus-within .ledger-overlay .ledger-pill {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (max-width: 767px) {
+  .ledger-cell--visual .ledger-overlay .ledger-pill { opacity: 1; transform: none; }
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+.footer-media { position: absolute; inset: 0; z-index: 0; }
+.footer-media .media-img { filter: grayscale(1) sepia(0.2) contrast(1.1) brightness(0.55); transform: scale(1.02); }
+.footer-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, #111112 0%, rgba(17,17,18,0.88) 30%, rgba(17,17,18,0.93) 100%),
+    radial-gradient(ellipse 70% 55% at 50% 0%, rgba(59,65,60,0.35), transparent 70%);
+}
+
+.social-icon {
+  display: grid;
+  place-items: center;
+  width: 44px; height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.75);
+  transition: color 0.35s ease, border-color 0.35s ease, transform 0.35s var(--ease-out-expo);
+}
+.social-icon:hover { color: #D4C5B9; border-color: #D4C5B9; transform: translateY(-2px); }
+
+/* --------------------------------------------------------------------------
+   Custom cursor (fine pointers only — see main.js for the matchMedia gate)
+   -------------------------------------------------------------------------- */
+.cursor-el {
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 70;
+  display: none;
+  transform: translate(-50%, -50%);
+}
+.has-fine-cursor .cursor-el { display: flex; }
+
+#cursor-dot {
+  width: 5px; height: 5px;
+  background: #D4C5B9;
+  border-radius: 999px;
+}
+#cursor-ring {
+  width: 34px; height: 34px;
+  border: 1px solid rgba(212, 197, 185, 0.55);
+  border-radius: 999px;
+  align-items: center;
+  justify-content: center;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #D4C5B9;
+  transition: width 0.3s var(--ease-out-expo), height 0.3s var(--ease-out-expo), background-color 0.3s ease, border-color 0.3s ease;
+}
+#cursor-ring.cursor-active {
+  width: 62px; height: 62px;
+  background: rgba(212, 197, 185, 0.1);
+}
+.has-fine-cursor, .has-fine-cursor a, .has-fine-cursor button { cursor: none; }
+
+/* --------------------------------------------------------------------------
+   Generic small-viewport polish
+   -------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  .ledger-cell { min-height: 320px; }
+  .ledger-overlay--data { opacity: 1; transform: none; margin-top: 1.5rem; }
+}

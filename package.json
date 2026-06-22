@@ -1,0 +1,26 @@
+{
+  "name": "anika-rao-studio-portfolio",
+  "version": "1.0.0",
+  "description": "Single-page architecture portfolio — Express static server with a vanilla JS/HTML5/Tailwind front end.",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/tailwind-input.css -o ./public/css/tailwind.css --minify",
+    "watch:css": "tailwindcss -i ./src/tailwind-input.css -o ./public/css/tailwind.css --watch",
+    "prestart": "npm run build:css",
+    "predev": "npm run build:css",
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.13",
+    "postcss": "^8.4.47",
+    "autoprefixer": "^10.4.20"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
