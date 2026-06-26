@@ -527,3 +527,268 @@ html:not(.js-smooth-ready) #scroll-spacer {
   .ledger-cell { min-height: 320px; }
   .ledger-overlay--data { opacity: 1; transform: none; margin-top: 1.5rem; }
 }
+
+/* --------------------------------------------------------------------------
+   Name display — hero h1 font override
+   TT Recordi Allegria is a commercial TypeType font; Cormorant Garamond
+   is loaded as the visible fallback via Google Fonts.
+   -------------------------------------------------------------------------- */
+.name-display {
+  font-family: "TT Recordi Allegria", "Cormorant Garamond", "Playfair Display", serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* --------------------------------------------------------------------------
+   Hero portrait — right side, curved inner (top-left) edge
+   -------------------------------------------------------------------------- */
+.hero-portrait {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 48%;
+  height: 100%;
+  border-top-left-radius: 50%;
+  overflow: hidden;
+  z-index: 1;
+}
+.hero-portrait .media-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.02);
+  filter: grayscale(0.65) sepia(0.12) contrast(1.05) brightness(0.9);
+}
+@media (max-width: 767px) {
+  .hero-portrait { display: none; }
+}
+
+/* Hero text column — constrained to left half on desktop */
+.hero-text-col { max-width: 100%; }
+@media (min-width: 1024px) { .hero-text-col { max-width: 56%; } }
+
+/* --------------------------------------------------------------------------
+   Project ledger scrollable wrapper (10 cards)
+   -------------------------------------------------------------------------- */
+.ledger-scroll-wrap {
+  max-height: 80vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212, 197, 185, 0.4) transparent;
+}
+.ledger-scroll-wrap::-webkit-scrollbar { width: 3px; }
+.ledger-scroll-wrap::-webkit-scrollbar-track { background: transparent; }
+.ledger-scroll-wrap::-webkit-scrollbar-thumb { background: rgba(212, 197, 185, 0.4); border-radius: 2px; }
+
+/* --------------------------------------------------------------------------
+   Skill accordion (replaces flat skill-row matrix)
+   -------------------------------------------------------------------------- */
+.skill-accordion {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  max-height: 520px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212, 197, 185, 0.45) transparent;
+  padding-right: 4px;
+}
+.skill-accordion::-webkit-scrollbar { width: 3px; }
+.skill-accordion::-webkit-scrollbar-track { background: transparent; }
+.skill-accordion::-webkit-scrollbar-thumb { background: rgba(212, 197, 185, 0.45); border-radius: 2px; }
+
+.skill-accordion-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.skill-accordion-summary {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr 1.5rem;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.6rem 0.5rem;
+  cursor: pointer;
+  list-style: none;
+  outline: none;
+  transition: padding-left 0.45s var(--ease-out-expo);
+}
+.skill-accordion-summary::-webkit-details-marker { display: none; }
+.skill-accordion-summary:hover { padding-left: 1.25rem; }
+
+.skill-accordion-num {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  color: #D4C5B9;
+  letter-spacing: 0.1em;
+}
+
+.skill-accordion-title {
+  font-family: "Cormorant Garamond", "Fraunces", serif;
+  font-size: clamp(1.4rem, 2.6vw, 2.3rem);
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: -0.01em;
+  color: #fff;
+  transition: transform 0.5s var(--ease-out-expo), color 0.4s ease;
+}
+.skill-accordion-summary:hover .skill-accordion-title { transform: translateX(6px); }
+
+.skill-accordion-chevron {
+  justify-self: end;
+  color: #D4C5B9;
+  opacity: 0.7;
+  transition: transform 0.4s var(--ease-out-expo), opacity 0.3s ease;
+}
+.skill-accordion-summary:hover .skill-accordion-chevron { opacity: 1; }
+.skill-accordion-item[open] .skill-accordion-chevron { transform: rotate(180deg); }
+
+.skill-accordion-body {
+  list-style: none;
+  padding: 0 0.5rem 1.75rem 3.75rem;
+  display: flex;
+  flex-direction: column;
+}
+.skill-accordion-body li {
+  font-family: "Cormorant Garamond", "Fraunces", serif;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  font-style: italic;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.65);
+  letter-spacing: 0.02em;
+  padding: 0.6rem 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.skill-accordion-body li:last-child { border-bottom: none; padding-bottom: 0; }
+.skill-accordion-body li:hover { color: #D4C5B9; transform: translateX(8px); }
+
+/* ==========================================================================
+   SECTION LIGHT-THEME OVERRIDES
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Hero — beige background, grey grid, black text
+   -------------------------------------------------------------------------- */
+#hero {
+  background-color: #D4C5B9;
+  color: #111112;
+}
+
+#hero .bp-grid {
+  background-image:
+    linear-gradient(rgba(80, 80, 80, 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(80, 80, 80, 0.18) 1px, transparent 1px);
+}
+
+/* Fix: name cut by reveal-mask overflow + oversized mobile font */
+#hero h1 {
+  line-height: 1.08;
+  font-size: 11vw;
+}
+@media (min-width: 640px) { #hero h1 { font-size: 9vw; } }
+@media (min-width: 1024px) { #hero h1 { font-size: 6.4vw; } }
+@media (min-width: 1280px) { #hero h1 { font-size: 5.6vw; } }
+
+#hero .reveal-mask {
+  padding-bottom: 0.08em;
+}
+
+#hero .overline {
+  color: rgba(17, 17, 18, 0.55);
+}
+
+#hero .text-beige {
+  color: #111112;
+}
+
+#hero .text-white\/75 {
+  color: rgba(17, 17, 18, 0.72);
+}
+
+#hero .text-white\/60 {
+  color: rgba(17, 17, 18, 0.6);
+}
+
+#hero .hover\:text-beige:hover {
+  color: #3B413C;
+}
+
+#hero .decoration-white\/20 {
+  text-decoration-color: rgba(17, 17, 18, 0.2);
+}
+
+#hero .hover\:decoration-beige:hover {
+  text-decoration-color: #3B413C;
+}
+
+#hero .text-stone-400 {
+  color: rgba(17, 17, 18, 0.5);
+}
+
+#hero .text-beige\/50 {
+  color: rgba(17, 17, 18, 0.3);
+}
+
+/* Button: invisible on beige bg — flip to olive so it has contrast */
+#hero .btn-primary {
+  background: #3B413C;
+  color: #D4C5B9;
+}
+#hero .btn-primary:hover {
+  background: #111112;
+  color: #D4C5B9;
+  box-shadow: 0 12px 30px -8px rgba(17, 17, 18, 0.35);
+}
+
+/* Corner ticks: beige ticks are invisible on beige bg */
+#hero .corner-tick {
+  border-color: rgba(17, 17, 18, 0.35);
+}
+
+/* Scroll-cue line: invert colours for light bg */
+#hero .scroll-cue-line {
+  background: linear-gradient(to bottom, rgba(17,17,18,0.05), rgba(17,17,18,0.45) 60%, rgba(17,17,18,0.05));
+}
+#hero .scroll-cue-line::after {
+  background: #D4C5B9;
+}
+
+/* --------------------------------------------------------------------------
+   Skills — darker olive green
+   -------------------------------------------------------------------------- */
+#skills {
+  background-color: #2C312D;
+}
+
+/* --------------------------------------------------------------------------
+   Works / Project Ledger — beige background, project cards stay black
+   -------------------------------------------------------------------------- */
+#works {
+  background-color: #D4C5B9;
+  color: #111112;
+}
+
+#works .overline {
+  color: rgba(17, 17, 18, 0.55);
+}
+
+#works .text-white\/60 {
+  color: rgba(17, 17, 18, 0.6);
+}
+
+/* Grid borders: white-transparent borders are invisible on beige */
+#works .ledger-grid {
+  border-top-color: rgba(17, 17, 18, 0.15);
+  border-left-color: rgba(17, 17, 18, 0.15);
+}
+
+#works .ledger-cell {
+  border-right-color: rgba(17, 17, 18, 0.15);
+  border-bottom-color: rgba(17, 17, 18, 0.15);
+}
+
+/* Scrollbar thumb: darker on beige bg */
+#works .ledger-scroll-wrap {
+  scrollbar-color: rgba(17, 17, 18, 0.3) transparent;
+}
+#works .ledger-scroll-wrap::-webkit-scrollbar-thumb {
+  background: rgba(17, 17, 18, 0.3);
+}

@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Anika Rao — Principal Architect</title>
-<meta name="description" content="Anika Rao — Principal Architect. Selected works in parametric design, adaptive reuse and international mixed-use practice." />
+<title>Tiara Raghuvanshi — Principal Architect</title>
+<meta name="description" content="Tiara Raghuvanshi — Principal Architect. Selected works in BIM, computational design, and international practice." />
 
-<!-- Fonts: Fraunces (display serif) · Inter (body/UI sans) · IBM Plex Mono (technical/data) -->
+<!-- Fonts: Cormorant Garamond (name/skills) · Fraunces (display) · Inter (body) · IBM Plex Mono (mono) -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
 <!-- Tailwind — compiled locally via the Tailwind CLI (see package.json "build:css") -->
 <link rel="stylesheet" href="css/tailwind.css" />
@@ -28,31 +28,21 @@
 
   <!-- ============ FLOATING NAV ============ -->
   <header id="site-nav" class="fixed top-0 left-0 right-0 z-40 flex justify-center px-4 sm:px-6 pt-4 sm:pt-6" data-nav>
-    <nav class="nav-shell w-full max-w-6xl flex items-center justify-between gap-4 rounded-full pl-3 pr-2 py-2 sm:pl-5 sm:pr-2.5 sm:py-2.5">
+    <nav class="nav-shell w-full max-w-6xl flex items-center gap-4 rounded-full pl-3 pr-2 py-2 sm:pl-5 sm:pr-2.5 sm:py-2.5">
       <a href="#hero" class="flex items-center gap-2 shrink-0 group" data-cursor="text" data-cursor-text="TOP">
-        <span class="grid place-items-center w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-beige/40 font-mono text-[11px] tracking-widest2 text-beige group-hover:border-beige group-hover:bg-beige group-hover:text-obsidian transition-colors duration-300">AR</span>
-        <span class="hidden sm:block font-mono text-[11px] uppercase tracking-widest2 text-stone-400">Studio&nbsp;Index</span>
+        <span class="grid place-items-center w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-beige/40 font-mono text-[11px] tracking-widest2 text-beige group-hover:border-beige group-hover:bg-beige group-hover:text-obsidian transition-colors duration-300">TR</span>
       </a>
 
-      <ul class="hidden md:flex items-center gap-1 font-mono text-[12px] uppercase tracking-widest2 text-white/70">
+      <ul class="hidden md:flex ml-auto items-center gap-1 font-mono text-[12px] uppercase tracking-widest2 text-white/70">
         <li><a href="#hero" class="nav-link" data-section-link="hero">Index</a></li>
         <li><a href="#skills" class="nav-link" data-section-link="skills">Skills</a></li>
         <li><a href="#works" class="nav-link" data-section-link="works">Works</a></li>
         <li><a href="#contact" class="nav-link" data-section-link="contact">Contact</a></li>
       </ul>
 
-      <div class="flex items-center gap-2">
-        <span class="hidden sm:flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] pl-3 pr-3.5 py-1.5 font-mono text-[11px] uppercase tracking-widest2 text-stone-400">
-          <span class="relative flex h-1.5 w-1.5">
-            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-beige/70"></span>
-            <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-beige"></span>
-          </span>
-          Available — 2026
-        </span>
-        <button id="menu-toggle" class="md:hidden grid place-items-center w-10 h-10 rounded-full border border-white/15 text-white" aria-label="Open menu" aria-expanded="false">
-          <span class="burger"><span></span><span></span></span>
-        </button>
-      </div>
+      <button id="menu-toggle" class="md:hidden ml-auto grid place-items-center w-10 h-10 rounded-full border border-white/15 text-white" aria-label="Open menu" aria-expanded="false">
+        <span class="burger"><span></span><span></span></span>
+      </button>
     </nav>
   </header>
 
@@ -87,20 +77,27 @@
       <!-- faint blueprint grid texture -->
       <div class="bp-grid" aria-hidden="true"></div>
 
-      <div class="relative max-w-[1500px] mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-y-14 lg:gap-x-10 items-center">
+      <!-- Portrait — right side, curved inner edge (border-top-left-radius) -->
+      <div class="hero-portrait" aria-hidden="true">
+        <img
+          src="https://picsum.photos/seed/anika-rao-portrait/900/1200"
+          alt=""
+          loading="lazy"
+          class="media-img"
+          onerror="this.classList.add('media-img--failed')"
+        />
+      </div>
 
-        <!-- LEFT — 60% : typography -->
-        <div class="lg:col-span-7 order-2 lg:order-1">
-          <p class="reveal-row overline mb-6 sm:mb-8" data-reveal>
-            <span class="text-beige">01</span> — Principal Architect
-          </p>
+      <!-- Text content — constrained to left column on desktop -->
+      <div class="relative z-10 max-w-[1500px] mx-auto w-full">
+        <div class="hero-text-col">
 
-          <h1 class="font-display font-normal leading-[0.92] tracking-tight text-[15vw] sm:text-[10vw] lg:text-[6.4vw] xl:text-[5.6vw]">
-            <span class="reveal-mask block overflow-hidden"><span class="reveal-inner block" data-hero-line>Anika</span></span>
-            <span class="reveal-mask block overflow-hidden"><span class="reveal-inner block text-beige" data-hero-line>Rao</span></span>
+          <h1 class="name-display font-normal tracking-tight">
+            <span class="reveal-mask block overflow-hidden"><span class="reveal-inner block" data-hero-line>Tiara</span></span>
+            <span class="reveal-mask block overflow-hidden"><span class="reveal-inner block" data-hero-line>Raghuvanshi</span></span>
           </h1>
 
-          <p class="reveal-row mt-7 sm:mt-9 max-w-xl text-[15px] sm:text-base leading-relaxed text-white/75" data-reveal>
+          <p class="reveal-row mt-10 sm:mt-12 max-w-xl text-[15px] sm:text-base leading-relaxed text-white/75" data-reveal>
             My practice treats material constraint as the opening argument of a design, not its limitation. Twelve years spent working between Mumbai, Rotterdam and Singapore have shaped a method built on structural clarity, site-specific reasoning, and a refusal to let an idea outrun what it costs to build.
           </p>
 
@@ -118,31 +115,6 @@
             12 Yrs Practice <span class="text-beige/50 mx-2">—</span> 14 Countries Studied <span class="text-beige/50 mx-2">—</span> 90,400+ Sqm Delivered
           </p>
         </div>
-
-        <!-- RIGHT — 40% : asymmetric framed portrait -->
-        <div class="lg:col-span-5 order-1 lg:order-2">
-          <div class="reveal-row" data-reveal>
-            <div class="relative ml-auto w-[78%] sm:w-[64%] lg:w-full max-w-[360px] lg:max-w-none lg:translate-y-[-6%]">
-              <div class="media-frame aspect-[4/5]" data-img-fallback>
-                <img
-                  src="https://picsum.photos/seed/anika-rao-portrait/900/1200"
-                  alt="Portrait of Anika Rao, Principal Architect"
-                  loading="lazy"
-                  class="media-img"
-                  onerror="this.classList.add('media-img--failed')"
-                />
-                <span class="corner-tick tl"></span>
-                <span class="corner-tick tr"></span>
-                <span class="corner-tick bl"></span>
-                <span class="corner-tick br"></span>
-              </div>
-              <div class="flex items-start justify-between mt-3 font-mono text-[10px] uppercase tracking-widest2 text-stone-400">
-                <span>Fig. 01 — Portrait</span>
-                <span>Studio, 2026</span>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
       <a href="#skills" class="scroll-cue" data-cursor="text" data-cursor-text="Scroll" aria-label="Scroll to skills">
@@ -156,53 +128,66 @@
     <!-- ======================================================= -->
     <section id="skills" class="relative bg-olive px-5 sm:px-8 lg:px-12 py-24 sm:py-32">
       <div class="max-w-[1500px] mx-auto">
-        <div class="reveal-row flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-14 sm:mb-20" data-reveal>
-          <div>
-            <p class="overline mb-4 text-beige/80">02 — Capabilities</p>
-            <h2 class="font-display text-[10vw] sm:text-6xl lg:text-7xl leading-[0.95]">The Structural<br class="hidden sm:block" /> Skill Set</h2>
-          </div>
-          <p class="max-w-sm text-sm leading-relaxed text-white/60 font-sans">
-            Six disciplines, one continuous method — from early massing logic through to the documentation that gets a building built.
-          </p>
+        <div class="reveal-row mb-14 sm:mb-20" data-reveal>
+          <h2 class="font-display text-[10vw] sm:text-6xl lg:text-7xl leading-[0.95]">The Structural<br class="hidden sm:block" /> Skill Set</h2>
         </div>
 
-        <div class="skill-list border-t border-white/15" data-magnetic-list>
-          <div class="skill-row reveal-row" data-reveal data-magnetic-row>
-            <span class="skill-index">01</span>
-            <span class="skill-name">Parametric &amp; Computational Design</span>
-            <span class="skill-tags">Grasshopper · Rhino · Generative Massing</span>
-            <svg class="skill-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 15L15 5M15 5H7M15 5V13" stroke="currentColor" stroke-width="1.3"/></svg>
-          </div>
-          <div class="skill-row reveal-row" data-reveal data-magnetic-row>
-            <span class="skill-index">02</span>
-            <span class="skill-name">Schematic &amp; Design Development</span>
-            <span class="skill-tags">Concept Studies · Spatial Programming · Massing Studies</span>
-            <svg class="skill-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 15L15 5M15 5H7M15 5V13" stroke="currentColor" stroke-width="1.3"/></svg>
-          </div>
-          <div class="skill-row reveal-row" data-reveal data-magnetic-row>
-            <span class="skill-index">03</span>
-            <span class="skill-name">Adaptive Reuse &amp; Heritage Conservation</span>
-            <span class="skill-tags">Material Archaeology · Retrofit Strategy · Heritage Compliance</span>
-            <svg class="skill-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 15L15 5M15 5H7M15 5V13" stroke="currentColor" stroke-width="1.3"/></svg>
-          </div>
-          <div class="skill-row reveal-row" data-reveal data-magnetic-row>
-            <span class="skill-index">04</span>
-            <span class="skill-name">BIM &amp; Technical Documentation</span>
-            <span class="skill-tags">Revit · IFC Coordination · Construction Sets</span>
-            <svg class="skill-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 15L15 5M15 5H7M15 5V13" stroke="currentColor" stroke-width="1.3"/></svg>
-          </div>
-          <div class="skill-row reveal-row" data-reveal data-magnetic-row>
-            <span class="skill-index">05</span>
-            <span class="skill-name">Sustainable &amp; Passive Systems</span>
-            <span class="skill-tags">Daylighting Analysis · Thermal Massing · Embodied Carbon</span>
-            <svg class="skill-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 15L15 5M15 5H7M15 5V13" stroke="currentColor" stroke-width="1.3"/></svg>
-          </div>
-          <div class="skill-row reveal-row" data-reveal data-magnetic-row>
-            <span class="skill-index">06</span>
-            <span class="skill-name">Client &amp; Project Leadership</span>
-            <span class="skill-tags">Stakeholder Strategy · Multi-Disciplinary Coordination · Fee &amp; Programme Management</span>
-            <svg class="skill-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 15L15 5M15 5H7M15 5V13" stroke="currentColor" stroke-width="1.3"/></svg>
-          </div>
+        <div class="skill-accordion">
+
+          <details class="skill-accordion-item reveal-row" data-reveal>
+            <summary class="skill-accordion-summary">
+              <span class="skill-accordion-num">01</span>
+              <span class="skill-accordion-title">BIM &amp; Digital Delivery</span>
+              <svg class="skill-accordion-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <ul class="skill-accordion-body">
+              <li>Revit</li>
+              <li>Autodesk Construction Cloud (ACC / BIM 360)</li>
+              <li>Navisworks Manage</li>
+              <li>Clash Detection</li>
+              <li>BIM Coordination</li>
+              <li>ProjectWise</li>
+            </ul>
+          </details>
+
+          <details class="skill-accordion-item reveal-row" data-reveal>
+            <summary class="skill-accordion-summary">
+              <span class="skill-accordion-num">02</span>
+              <span class="skill-accordion-title">Computational Design &amp; Automation</span>
+              <svg class="skill-accordion-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <ul class="skill-accordion-body">
+              <li>Dynamo</li>
+              <li>Python</li>
+              <li>InfraWorks</li>
+            </ul>
+          </details>
+
+          <details class="skill-accordion-item reveal-row" data-reveal>
+            <summary class="skill-accordion-summary">
+              <span class="skill-accordion-num">03</span>
+              <span class="skill-accordion-title">Design &amp; Visualization</span>
+              <svg class="skill-accordion-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <ul class="skill-accordion-body">
+              <li>Lumion</li>
+              <li>Enscape</li>
+              <li>V-Ray</li>
+            </ul>
+          </details>
+
+          <details class="skill-accordion-item reveal-row" data-reveal>
+            <summary class="skill-accordion-summary">
+              <span class="skill-accordion-num">04</span>
+              <span class="skill-accordion-title">CAD &amp; Documentation</span>
+              <svg class="skill-accordion-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <ul class="skill-accordion-body">
+              <li>AutoCAD</li>
+              <li>Microsoft Office</li>
+            </ul>
+          </details>
+
         </div>
       </div>
     </section>
@@ -212,16 +197,11 @@
     <!-- ======================================================= -->
     <section id="works" class="relative px-5 sm:px-8 lg:px-12 py-24 sm:py-32">
       <div class="max-w-[1500px] mx-auto">
-        <div class="reveal-row flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-14 sm:mb-16" data-reveal>
-          <div>
-            <p class="overline mb-4">03 — Selected Works</p>
-            <h2 class="font-display text-[10vw] sm:text-6xl lg:text-7xl leading-[0.95]">Project Ledger</h2>
-          </div>
-          <p class="max-w-sm text-sm leading-relaxed text-white/60">
-            Four entries: one academic thesis, and three international projects currently bound by non-disclosure — shown here as scope, not as image.
-          </p>
+        <div class="reveal-row mb-14 sm:mb-16" data-reveal>
+          <h2 class="font-display text-[10vw] sm:text-6xl lg:text-7xl leading-[0.95]">Project</h2>
         </div>
 
+        <div class="ledger-scroll-wrap">
         <div class="ledger-grid">
 
           <!-- BLOCK 01 — Academic Thesis (visual centerpiece) -->
@@ -253,7 +233,7 @@
             </div>
           </article>
 
-          <!-- BLOCK 02 — NDA technical sheet -->
+          <!-- BLOCK 02 -->
           <article class="ledger-cell ledger-cell--data reveal-row" data-reveal data-cursor="view" data-cursor-text="Brief">
             <div class="bp-grid bp-grid--cell" aria-hidden="true"></div>
             <div class="relative z-10">
@@ -278,7 +258,7 @@
             </div>
           </article>
 
-          <!-- BLOCK 03 — NDA technical sheet -->
+          <!-- BLOCK 03 -->
           <article class="ledger-cell ledger-cell--data reveal-row" data-reveal data-cursor="view" data-cursor-text="Brief">
             <div class="bp-grid bp-grid--cell" aria-hidden="true"></div>
             <div class="relative z-10">
@@ -303,7 +283,7 @@
             </div>
           </article>
 
-          <!-- BLOCK 04 — NDA technical sheet -->
+          <!-- BLOCK 04 -->
           <article class="ledger-cell ledger-cell--data reveal-row" data-reveal data-cursor="view" data-cursor-text="Brief">
             <div class="bp-grid bp-grid--cell" aria-hidden="true"></div>
             <div class="relative z-10">
@@ -328,6 +308,157 @@
             </div>
           </article>
 
+          <!-- BLOCK 05 -->
+          <article class="ledger-cell ledger-cell--data reveal-row" data-reveal data-cursor="view" data-cursor-text="Brief">
+            <div class="bp-grid bp-grid--cell" aria-hidden="true"></div>
+            <div class="relative z-10">
+              <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest2 text-beige/80 mb-5">
+                <span>Index 05 — Confidential</span>
+                <span class="px-2 py-0.5 rounded-full border border-beige/30">NDA</span>
+              </div>
+              <h3 class="font-display text-2xl sm:text-3xl mb-6">Project Solaris</h3>
+              <dl class="data-sheet">
+                <div><dt>Typology</dt><dd>Healthcare Campus</dd></div>
+                <div><dt>Location</dt><dd>Dubai, UAE</dd></div>
+                <div><dt>Scale</dt><dd>28,400 sqm</dd></div>
+                <div><dt>Phase</dt><dd>SD → DD</dd></div>
+                <div><dt>Spatial Scope</dt><dd>Clinical · Research · Support</dd></div>
+              </dl>
+            </div>
+            <div class="ledger-overlay ledger-overlay--data">
+              <a href="#" class="ledger-pill">
+                Request Briefing
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2.5 8.5L8.5 2.5M8.5 2.5H4M8.5 2.5V7" stroke="currentColor" stroke-width="1.2"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- BLOCK 06 -->
+          <article class="ledger-cell ledger-cell--data reveal-row" data-reveal data-cursor="view" data-cursor-text="Brief">
+            <div class="bp-grid bp-grid--cell" aria-hidden="true"></div>
+            <div class="relative z-10">
+              <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest2 text-beige/80 mb-5">
+                <span>Index 06 — Confidential</span>
+                <span class="px-2 py-0.5 rounded-full border border-beige/30">NDA</span>
+              </div>
+              <h3 class="font-display text-2xl sm:text-3xl mb-6">Project Nimbus</h3>
+              <dl class="data-sheet">
+                <div><dt>Typology</dt><dd>Transport Hub</dd></div>
+                <div><dt>Location</dt><dd>Mumbai, India</dd></div>
+                <div><dt>Scale</dt><dd>62,000 sqm</dd></div>
+                <div><dt>Phase</dt><dd>DD → CD</dd></div>
+                <div><dt>Spatial Scope</dt><dd>Transit · Commercial · Public Realm</dd></div>
+              </dl>
+            </div>
+            <div class="ledger-overlay ledger-overlay--data">
+              <a href="#" class="ledger-pill">
+                Request Briefing
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2.5 8.5L8.5 2.5M8.5 2.5H4M8.5 2.5V7" stroke="currentColor" stroke-width="1.2"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- BLOCK 07 -->
+          <article class="ledger-cell ledger-cell--data reveal-row" data-reveal data-cursor="view" data-cursor-text="Brief">
+            <div class="bp-grid bp-grid--cell" aria-hidden="true"></div>
+            <div class="relative z-10">
+              <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest2 text-beige/80 mb-5">
+                <span>Index 07 — Confidential</span>
+                <span class="px-2 py-0.5 rounded-full border border-beige/30">NDA</span>
+              </div>
+              <h3 class="font-display text-2xl sm:text-3xl mb-6">Project Axiom</h3>
+              <dl class="data-sheet">
+                <div><dt>Typology</dt><dd>Corporate Campus</dd></div>
+                <div><dt>Location</dt><dd>Amsterdam, Netherlands</dd></div>
+                <div><dt>Scale</dt><dd>15,600 sqm</dd></div>
+                <div><dt>Phase</dt><dd>Construction Documentation</dd></div>
+                <div><dt>Spatial Scope</dt><dd>Office · Amenity · Landscape</dd></div>
+              </dl>
+            </div>
+            <div class="ledger-overlay ledger-overlay--data">
+              <a href="#" class="ledger-pill">
+                Request Briefing
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2.5 8.5L8.5 2.5M8.5 2.5H4M8.5 2.5V7" stroke="currentColor" stroke-width="1.2"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- BLOCK 08 -->
+          <article class="ledger-cell ledger-cell--data reveal-row" data-reveal data-cursor="view" data-cursor-text="Brief">
+            <div class="bp-grid bp-grid--cell" aria-hidden="true"></div>
+            <div class="relative z-10">
+              <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest2 text-beige/80 mb-5">
+                <span>Index 08 — Confidential</span>
+                <span class="px-2 py-0.5 rounded-full border border-beige/30">NDA</span>
+              </div>
+              <h3 class="font-display text-2xl sm:text-3xl mb-6">Project Veritas</h3>
+              <dl class="data-sheet">
+                <div><dt>Typology</dt><dd>Heritage Restoration</dd></div>
+                <div><dt>Location</dt><dd>Rotterdam, Netherlands</dd></div>
+                <div><dt>Scale</dt><dd>8,900 sqm</dd></div>
+                <div><dt>Phase</dt><dd>Design Development</dd></div>
+                <div><dt>Spatial Scope</dt><dd>Civic · Cultural · Heritage</dd></div>
+              </dl>
+            </div>
+            <div class="ledger-overlay ledger-overlay--data">
+              <a href="#" class="ledger-pill">
+                Request Briefing
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2.5 8.5L8.5 2.5M8.5 2.5H4M8.5 2.5V7" stroke="currentColor" stroke-width="1.2"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- BLOCK 09 -->
+          <article class="ledger-cell ledger-cell--data reveal-row" data-reveal data-cursor="view" data-cursor-text="Brief">
+            <div class="bp-grid bp-grid--cell" aria-hidden="true"></div>
+            <div class="relative z-10">
+              <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest2 text-beige/80 mb-5">
+                <span>Index 09 — Confidential</span>
+                <span class="px-2 py-0.5 rounded-full border border-beige/30">NDA</span>
+              </div>
+              <h3 class="font-display text-2xl sm:text-3xl mb-6">Project Zenith</h3>
+              <dl class="data-sheet">
+                <div><dt>Typology</dt><dd>Mixed-Use Podium</dd></div>
+                <div><dt>Location</dt><dd>Hong Kong</dd></div>
+                <div><dt>Scale</dt><dd>35,200 sqm</dd></div>
+                <div><dt>Phase</dt><dd>SD → DD</dd></div>
+                <div><dt>Spatial Scope</dt><dd>Retail · F&amp;B · Service</dd></div>
+              </dl>
+            </div>
+            <div class="ledger-overlay ledger-overlay--data">
+              <a href="#" class="ledger-pill">
+                Request Briefing
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2.5 8.5L8.5 2.5M8.5 2.5H4M8.5 2.5V7" stroke="currentColor" stroke-width="1.2"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- BLOCK 10 -->
+          <article class="ledger-cell ledger-cell--data reveal-row" data-reveal data-cursor="view" data-cursor-text="Brief">
+            <div class="bp-grid bp-grid--cell" aria-hidden="true"></div>
+            <div class="relative z-10">
+              <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest2 text-beige/80 mb-5">
+                <span>Index 10 — Confidential</span>
+                <span class="px-2 py-0.5 rounded-full border border-beige/30">NDA</span>
+              </div>
+              <h3 class="font-display text-2xl sm:text-3xl mb-6">Project Indra</h3>
+              <dl class="data-sheet">
+                <div><dt>Typology</dt><dd>Civic Library</dd></div>
+                <div><dt>Location</dt><dd>Bangalore, India</dd></div>
+                <div><dt>Scale</dt><dd>12,400 sqm</dd></div>
+                <div><dt>Phase</dt><dd>Concept Design</dd></div>
+                <div><dt>Spatial Scope</dt><dd>Knowledge · Community · Public</dd></div>
+              </dl>
+            </div>
+            <div class="ledger-overlay ledger-overlay--data">
+              <a href="#" class="ledger-pill">
+                Request Briefing
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2.5 8.5L8.5 2.5M8.5 2.5H4M8.5 2.5V7" stroke="currentColor" stroke-width="1.2"/></svg>
+              </a>
+            </div>
+          </article>
+
+        </div>
         </div>
       </div>
     </section>
@@ -349,8 +480,6 @@
       </div>
 
       <div class="relative max-w-[1500px] mx-auto">
-        <p class="reveal-row overline text-beige/80 mb-8 sm:mb-10" data-reveal>04 — Reach Me Out</p>
-
         <h2 class="font-display leading-[0.92] tracking-tight text-[13vw] sm:text-[8vw] lg:text-[6.6vw]">
           <span class="reveal-mask block overflow-hidden"><span class="reveal-inner block" data-reveal>Let's Draw</span></span>
           <span class="reveal-mask block overflow-hidden"><span class="reveal-inner block text-beige" data-reveal>Something Up</span></span>
@@ -377,7 +506,7 @@
         </div>
 
         <div class="reveal-row mt-20 sm:mt-28 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-[10px] sm:text-[11px] uppercase tracking-widest2 text-stone-400" data-reveal>
-          <span>© 2026 Anika Rao Studio. All rights reserved.</span>
+          <span>© 2026 Tiara Raghuvanshi Studio. All rights reserved.</span>
           <a href="#hero" class="hover:text-beige transition-colors duration-300">Back to Top ↑</a>
         </div>
       </div>
