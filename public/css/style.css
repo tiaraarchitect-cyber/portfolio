@@ -362,13 +362,16 @@ html:not(.js-smooth-ready) #scroll-spacer {
   border-top: 1px solid rgba(255, 255, 255, 0.15);
   border-left: 1px solid rgba(255, 255, 255, 0.15);
 }
-@media (min-width: 860px) {
+@media (min-width: 640px) {
   .ledger-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 1024px) {
+  .ledger-grid { grid-template-columns: 1fr 1fr 1fr; }
 }
 
 .ledger-cell {
   position: relative;
-  min-height: 360px;
+  min-height: 260px;
   border-right: 1px solid rgba(255, 255, 255, 0.15);
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   overflow: hidden;
@@ -382,11 +385,15 @@ html:not(.js-smooth-ready) #scroll-spacer {
   margin-top: auto;
   width: 100%;
   padding: 1.75rem 1.5rem;
-  background: linear-gradient(to top, rgba(17,17,18,0.96) 35%, rgba(17,17,18,0.55) 75%, transparent 100%);
+  background: linear-gradient(to top, rgba(17,17,18,0.82) 35%, rgba(17,17,18,0.28) 68%, transparent 100%);
+}
+.ledger-cell--visual .ledger-overlay * {
+  text-shadow: 0 1px 6px rgba(0,0,0,0.9), 0 2px 16px rgba(0,0,0,0.75);
+  color: #fff;
 }
 
 .ledger-cell--data {
-  padding: 2rem 1.75rem;
+  padding: 1.4rem 1.25rem;
   background: #111112;
   display: flex;
   flex-direction: column;
@@ -463,7 +470,7 @@ html:not(.js-smooth-ready) #scroll-spacer {
    Footer
    -------------------------------------------------------------------------- */
 .footer-media { position: absolute; inset: 0; z-index: 0; }
-.footer-media .media-img { filter: grayscale(1) sepia(0.2) contrast(1.1) brightness(0.55); transform: scale(1.02); }
+.footer-media .media-img { filter: grayscale(1) sepia(0.15) contrast(1.0) brightness(0.92); transform: scale(1.02); }
 .footer-overlay {
   position: absolute;
   inset: 0;
@@ -524,7 +531,7 @@ html:not(.js-smooth-ready) #scroll-spacer {
    Generic small-viewport polish
    -------------------------------------------------------------------------- */
 @media (max-width: 767px) {
-  .ledger-cell { min-height: 320px; }
+  .ledger-cell { min-height: 240px; }
   .ledger-overlay--data { opacity: 1; transform: none; margin-top: 1.5rem; }
 }
 
@@ -540,25 +547,39 @@ html:not(.js-smooth-ready) #scroll-spacer {
 }
 
 /* --------------------------------------------------------------------------
-   Hero portrait — right side, curved inner (top-left) edge
+   Hero portrait — quarter-ellipse shape, top-right of hero
    -------------------------------------------------------------------------- */
+
+/* SVG filter def container — zero-size, keeps filters available */
+.portrait-svg-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
 .hero-portrait {
   position: absolute;
   top: 0;
   right: 0;
-  width: 48%;
+  width: 44%;
   height: 100%;
-  border-top-left-radius: 50%;
+  border-top-left-radius: 100%;
   overflow: hidden;
   z-index: 1;
+  pointer-events: none;
 }
-.hero-portrait .media-img {
+
+.hero-portrait img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: scale(1.02);
-  filter: grayscale(0.65) sepia(0.12) contrast(1.05) brightness(0.9);
+  object-position: center top;
+  filter: contrast(1.05) brightness(0.96);
+  transform: scale(1.04);
 }
+
 @media (max-width: 767px) {
   .hero-portrait { display: none; }
 }

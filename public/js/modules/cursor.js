@@ -61,7 +61,7 @@ function onOut(e) {
     e.relatedTarget && e.relatedTarget.closest
       ? e.relatedTarget.closest("[data-cursor]")
       : null;
-  if (related === target) return; // still within the same hover target
+  if (related === target) return;
   deactivate();
 }
 

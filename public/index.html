@@ -19,6 +19,16 @@
 
 <body class="bg-obsidian text-white font-sans antialiased selection:bg-beige selection:text-obsidian">
 
+  <!-- ============ SVG FILTER DEFS (paint texture for portrait borders) ============ -->
+  <svg class="portrait-svg-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="paint-border" x="-50%" y="-50%" width="200%" height="200%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.038 0.072" numOctaves="5" seed="11" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
   <!-- ============ CUSTOM CURSOR (desktop / fine pointers only) ============ -->
   <div id="cursor-ring" class="cursor-el" aria-hidden="true"></div>
   <div id="cursor-dot" class="cursor-el" aria-hidden="true"></div>
@@ -77,14 +87,13 @@
       <!-- faint blueprint grid texture -->
       <div class="bp-grid" aria-hidden="true"></div>
 
-      <!-- Portrait — right side, curved inner edge (border-top-left-radius) -->
+      <!-- Portrait — quarter-ellipse shape fills top-right of hero -->
       <div class="hero-portrait" aria-hidden="true">
         <img
-          src="https://picsum.photos/seed/anika-rao-portrait/900/1200"
+          src="/images/portrait.jpg"
           alt=""
           loading="lazy"
-          class="media-img"
-          onerror="this.classList.add('media-img--failed')"
+          onerror="this.parentElement.style.opacity='0'"
         />
       </div>
 
@@ -97,9 +106,11 @@
             <span class="reveal-mask block overflow-hidden"><span class="reveal-inner block" data-hero-line>Raghuvanshi</span></span>
           </h1>
 
-          <p class="reveal-row mt-10 sm:mt-12 max-w-xl text-[15px] sm:text-base leading-relaxed text-white/75" data-reveal>
-            My practice treats material constraint as the opening argument of a design, not its limitation. Twelve years spent working between Mumbai, Rotterdam and Singapore have shaped a method built on structural clarity, site-specific reasoning, and a refusal to let an idea outrun what it costs to build.
-          </p>
+          <div class="reveal-row mt-8 sm:mt-10 max-w-lg space-y-4 text-[13px] sm:text-sm leading-relaxed text-white/75" data-reveal>
+            <p>I am an Architect and BIM Specialist with over four years of experience in delivering complex infrastructure, transportation, and residential projects. My portfolio includes metro systems, railway stations, depots, housing developments, and international transit projects, where I have contributed to design development, BIM implementation, and multidisciplinary coordination.</p>
+            <p>Passionate about combining design with technology, I leverage tools such as Autodesk Revit, Navisworks, and other BIM solutions to create efficient, accurate, and collaborative project workflows. I enjoy solving design challenges, optimizing digital processes, and transforming concepts into practical, high-quality design solutions.</p>
+            <p>Driven by continuous learning and innovation, I am committed to advancing digital delivery and sustainable design practices. My goal is to create impactful, future-ready environments while collaborating with multidisciplinary teams to deliver projects that leave a lasting positive impact.</p>
+          </div>
 
           <div class="reveal-row mt-8 sm:mt-10 flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-8" data-reveal>
             <a href="#works" class="btn-primary group" data-cursor="view" data-cursor-text="View">
@@ -111,16 +122,9 @@
             </a>
           </div>
 
-          <p class="reveal-row mt-12 sm:mt-16 font-mono text-[11px] sm:text-xs uppercase tracking-widest2 text-stone-400" data-reveal>
-            12 Yrs Practice <span class="text-beige/50 mx-2">—</span> 14 Countries Studied <span class="text-beige/50 mx-2">—</span> 90,400+ Sqm Delivered
-          </p>
         </div>
       </div>
 
-      <a href="#skills" class="scroll-cue" data-cursor="text" data-cursor-text="Scroll" aria-label="Scroll to skills">
-        <span class="scroll-cue-line"></span>
-        <span class="font-mono text-[10px] uppercase tracking-widest2 text-stone-400">Scroll</span>
-      </a>
     </section>
 
     <!-- ======================================================= -->
@@ -204,257 +208,111 @@
         <div class="ledger-scroll-wrap">
         <div class="ledger-grid">
 
-          <!-- BLOCK 01 — Academic Thesis (visual centerpiece) -->
-          <article class="ledger-cell ledger-cell--visual reveal-row" data-reveal data-cursor="view" data-cursor-text="Read">
-            <div class="media-frame ledger-media" data-img-fallback>
-              <img
-                src="https://picsum.photos/seed/liminal-thresholds-thesis/1200/1500"
-                alt="Watercolor section study from the Liminal Thresholds thesis"
-                loading="lazy"
-                class="media-img media-img--sketch"
-                onerror="this.classList.add('media-img--failed')"
-              />
-              <span class="corner-tick tl"></span>
-              <span class="corner-tick br"></span>
+          <!-- INDEX 01 — Dubai Metro Blue Line -->
+          <article class="ledger-cell ledger-cell--visual reveal-row" data-reveal data-cursor="view" data-cursor-text="View">
+            <div class="media-frame">
+              <img src="/images/1.png" alt="Dubai Metro Blue Line" class="media-img" loading="lazy" onerror="this.classList.add('media-img--failed')" />
             </div>
             <div class="ledger-overlay">
-              <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest2 text-beige/80 mb-3">
-                <span>Index 01 — Academic</span>
-                <span>2015</span>
-              </div>
-              <h3 class="font-display text-2xl sm:text-3xl mb-2">Liminal Thresholds</h3>
-              <p class="text-xs sm:text-[13px] text-white/70 leading-relaxed mb-5 max-w-sm">
-                Master of Architecture thesis, TU Delft — an independent study of the threshold between public ownership and private use, tested across a sequence of watercolor sections of a reclaimed waterfront edge.
-              </p>
-              <a href="works/thesis.html" target="_blank" rel="noopener" class="ledger-pill">
-                Read the Thesis
-                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2.5 8.5L8.5 2.5M8.5 2.5H4M8.5 2.5V7" stroke="currentColor" stroke-width="1.2"/></svg>
-              </a>
+              <div class="font-mono text-[10px] uppercase tracking-widest2 text-beige/80 mb-2">Index 01 — Transit</div>
+              <h3 class="font-display text-xl sm:text-2xl mb-3">Dubai Metro Blue Line</h3>
+              <a href="works/dubai-metro.html" class="ledger-pill">View Brief <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2.5 8.5L8.5 2.5M8.5 2.5H4M8.5 2.5V7" stroke="currentColor" stroke-width="1.2"/></svg></a>
             </div>
           </article>
 
-          <!-- BLOCK 02 -->
-          <article class="ledger-cell ledger-cell--data reveal-row" data-reveal data-cursor="view" data-cursor-text="Brief">
-            <div class="bp-grid bp-grid--cell" aria-hidden="true"></div>
-            <div class="relative z-10">
-              <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest2 text-beige/80 mb-5">
-                <span>Index 02 — Confidential</span>
-                <span class="px-2 py-0.5 rounded-full border border-beige/30">NDA</span>
-              </div>
-              <h3 class="font-display text-2xl sm:text-3xl mb-6">Project Meridian</h3>
-              <dl class="data-sheet">
-                <div><dt>Typology</dt><dd>Mixed-Use Tower</dd></div>
-                <div><dt>Location</dt><dd>Singapore</dd></div>
-                <div><dt>Scale</dt><dd>42,600 sqm</dd></div>
-                <div><dt>Phase</dt><dd>SD → CD</dd></div>
-                <div><dt>Spatial Scope</dt><dd>Retail · Hospitality · Residential</dd></div>
-              </dl>
+          <!-- INDEX 02 — AlUla Tram Project -->
+          <article class="ledger-cell ledger-cell--visual reveal-row" data-reveal data-cursor="view" data-cursor-text="View">
+            <div class="media-frame">
+              <img src="/images/2.png" alt="AlUla Tram Project" class="media-img" loading="lazy" onerror="this.classList.add('media-img--failed')" />
             </div>
-            <div class="ledger-overlay ledger-overlay--data">
-              <a href="works/project-meridian.html" target="_blank" rel="noopener" class="ledger-pill">
-                Request Briefing
-                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2.5 8.5L8.5 2.5M8.5 2.5H4M8.5 2.5V7" stroke="currentColor" stroke-width="1.2"/></svg>
-              </a>
+            <div class="ledger-overlay">
+              <div class="font-mono text-[10px] uppercase tracking-widest2 text-beige/80 mb-2">Index 02 — Transit</div>
+              <h3 class="font-display text-xl sm:text-2xl mb-3">AlUla Tram Project</h3>
+              <a href="works/alula-tram.html" class="ledger-pill">View Brief <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2.5 8.5L8.5 2.5M8.5 2.5H4M8.5 2.5V7" stroke="currentColor" stroke-width="1.2"/></svg></a>
             </div>
           </article>
 
-          <!-- BLOCK 03 -->
-          <article class="ledger-cell ledger-cell--data reveal-row" data-reveal data-cursor="view" data-cursor-text="Brief">
-            <div class="bp-grid bp-grid--cell" aria-hidden="true"></div>
-            <div class="relative z-10">
-              <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest2 text-beige/80 mb-5">
-                <span>Index 03 — Confidential</span>
-                <span class="px-2 py-0.5 rounded-full border border-beige/30">NDA</span>
-              </div>
-              <h3 class="font-display text-2xl sm:text-3xl mb-6">Project Aurelia</h3>
-              <dl class="data-sheet">
-                <div><dt>Typology</dt><dd>Cultural Campus</dd></div>
-                <div><dt>Location</dt><dd>Doha, Qatar</dd></div>
-                <div><dt>Scale</dt><dd>18,200 sqm</dd></div>
-                <div><dt>Phase</dt><dd>Design Development</dd></div>
-                <div><dt>Spatial Scope</dt><dd>Civic · Cultural · Public Realm</dd></div>
-              </dl>
+          <!-- INDEX 03 — Kuwait–Riyadh Maglev Line -->
+          <article class="ledger-cell ledger-cell--visual reveal-row" data-reveal data-cursor="view" data-cursor-text="View">
+            <div class="media-frame">
+              <img src="/images/3.png" alt="Kuwait–Riyadh Maglev Line" class="media-img" loading="lazy" onerror="this.classList.add('media-img--failed')" />
             </div>
-            <div class="ledger-overlay ledger-overlay--data">
-              <a href="works/project-aurelia.html" target="_blank" rel="noopener" class="ledger-pill">
-                Request Briefing
-                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2.5 8.5L8.5 2.5M8.5 2.5H4M8.5 2.5V7" stroke="currentColor" stroke-width="1.2"/></svg>
-              </a>
+            <div class="ledger-overlay">
+              <div class="font-mono text-[10px] uppercase tracking-widest2 text-beige/80 mb-2">Index 03 — Transit</div>
+              <h3 class="font-display text-xl sm:text-2xl mb-3">Kuwait–Riyadh Maglev Line</h3>
+              <a href="works/kuwait-riyadh-maglev.html" class="ledger-pill">View Brief <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2.5 8.5L8.5 2.5M8.5 2.5H4M8.5 2.5V7" stroke="currentColor" stroke-width="1.2"/></svg></a>
             </div>
           </article>
 
-          <!-- BLOCK 04 -->
-          <article class="ledger-cell ledger-cell--data reveal-row" data-reveal data-cursor="view" data-cursor-text="Brief">
-            <div class="bp-grid bp-grid--cell" aria-hidden="true"></div>
-            <div class="relative z-10">
-              <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest2 text-beige/80 mb-5">
-                <span>Index 04 — Confidential</span>
-                <span class="px-2 py-0.5 rounded-full border border-beige/30">NDA</span>
-              </div>
-              <h3 class="font-display text-2xl sm:text-3xl mb-6">Project Kintsugi</h3>
-              <dl class="data-sheet">
-                <div><dt>Typology</dt><dd>Adaptive-Reuse Residential</dd></div>
-                <div><dt>Location</dt><dd>Lisbon, Portugal</dd></div>
-                <div><dt>Scale</dt><dd>9,800 sqm</dd></div>
-                <div><dt>Phase</dt><dd>Construction Documentation</dd></div>
-                <div><dt>Spatial Scope</dt><dd>Residential · Heritage Retrofit</dd></div>
-              </dl>
+          <!-- INDEX 04 — Genoa SkyMetro -->
+          <article class="ledger-cell ledger-cell--visual reveal-row" data-reveal data-cursor="view" data-cursor-text="View">
+            <div class="media-frame">
+              <img src="/images/4.png" alt="Genoa SkyMetro" class="media-img" loading="lazy" onerror="this.classList.add('media-img--failed')" />
             </div>
-            <div class="ledger-overlay ledger-overlay--data">
-              <a href="works/project-kintsugi.html" target="_blank" rel="noopener" class="ledger-pill">
-                Request Briefing
-                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2.5 8.5L8.5 2.5M8.5 2.5H4M8.5 2.5V7" stroke="currentColor" stroke-width="1.2"/></svg>
-              </a>
+            <div class="ledger-overlay">
+              <div class="font-mono text-[10px] uppercase tracking-widest2 text-beige/80 mb-2">Index 04 — Transit</div>
+              <h3 class="font-display text-xl sm:text-2xl mb-3">Genoa SkyMetro</h3>
+              <a href="works/genoa-skymetro.html" class="ledger-pill">View Brief <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2.5 8.5L8.5 2.5M8.5 2.5H4M8.5 2.5V7" stroke="currentColor" stroke-width="1.2"/></svg></a>
             </div>
           </article>
 
-          <!-- BLOCK 05 -->
-          <article class="ledger-cell ledger-cell--data reveal-row" data-reveal data-cursor="view" data-cursor-text="Brief">
-            <div class="bp-grid bp-grid--cell" aria-hidden="true"></div>
-            <div class="relative z-10">
-              <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest2 text-beige/80 mb-5">
-                <span>Index 05 — Confidential</span>
-                <span class="px-2 py-0.5 rounded-full border border-beige/30">NDA</span>
-              </div>
-              <h3 class="font-display text-2xl sm:text-3xl mb-6">Project Solaris</h3>
-              <dl class="data-sheet">
-                <div><dt>Typology</dt><dd>Healthcare Campus</dd></div>
-                <div><dt>Location</dt><dd>Dubai, UAE</dd></div>
-                <div><dt>Scale</dt><dd>28,400 sqm</dd></div>
-                <div><dt>Phase</dt><dd>SD → DD</dd></div>
-                <div><dt>Spatial Scope</dt><dd>Clinical · Research · Support</dd></div>
-              </dl>
+          <!-- INDEX 05 — Etihad Rail -->
+          <article class="ledger-cell ledger-cell--visual reveal-row" data-reveal data-cursor="view" data-cursor-text="View">
+            <div class="media-frame">
+              <img src="/images/5.png" alt="Etihad Rail" class="media-img" loading="lazy" onerror="this.classList.add('media-img--failed')" />
             </div>
-            <div class="ledger-overlay ledger-overlay--data">
-              <a href="#" class="ledger-pill">
-                Request Briefing
-                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2.5 8.5L8.5 2.5M8.5 2.5H4M8.5 2.5V7" stroke="currentColor" stroke-width="1.2"/></svg>
-              </a>
+            <div class="ledger-overlay">
+              <div class="font-mono text-[10px] uppercase tracking-widest2 text-beige/80 mb-2">Index 05 — Infrastructure</div>
+              <h3 class="font-display text-xl sm:text-2xl mb-3">Etihad Rail</h3>
+              <a href="works/etihad-rail.html" class="ledger-pill">View Brief <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2.5 8.5L8.5 2.5M8.5 2.5H4M8.5 2.5V7" stroke="currentColor" stroke-width="1.2"/></svg></a>
             </div>
           </article>
 
-          <!-- BLOCK 06 -->
-          <article class="ledger-cell ledger-cell--data reveal-row" data-reveal data-cursor="view" data-cursor-text="Brief">
-            <div class="bp-grid bp-grid--cell" aria-hidden="true"></div>
-            <div class="relative z-10">
-              <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest2 text-beige/80 mb-5">
-                <span>Index 06 — Confidential</span>
-                <span class="px-2 py-0.5 rounded-full border border-beige/30">NDA</span>
-              </div>
-              <h3 class="font-display text-2xl sm:text-3xl mb-6">Project Nimbus</h3>
-              <dl class="data-sheet">
-                <div><dt>Typology</dt><dd>Transport Hub</dd></div>
-                <div><dt>Location</dt><dd>Mumbai, India</dd></div>
-                <div><dt>Scale</dt><dd>62,000 sqm</dd></div>
-                <div><dt>Phase</dt><dd>DD → CD</dd></div>
-                <div><dt>Spatial Scope</dt><dd>Transit · Commercial · Public Realm</dd></div>
-              </dl>
+          <!-- INDEX 06 — Amritsar Railway Station -->
+          <article class="ledger-cell ledger-cell--visual reveal-row" data-reveal data-cursor="view" data-cursor-text="View">
+            <div class="media-frame">
+              <img src="/images/6.png" alt="Amritsar Railway Station" class="media-img" loading="lazy" onerror="this.classList.add('media-img--failed')" />
             </div>
-            <div class="ledger-overlay ledger-overlay--data">
-              <a href="#" class="ledger-pill">
-                Request Briefing
-                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2.5 8.5L8.5 2.5M8.5 2.5H4M8.5 2.5V7" stroke="currentColor" stroke-width="1.2"/></svg>
-              </a>
+            <div class="ledger-overlay">
+              <div class="font-mono text-[10px] uppercase tracking-widest2 text-beige/80 mb-2">Index 06 — Transit</div>
+              <h3 class="font-display text-xl sm:text-2xl mb-3">Amritsar Railway Station</h3>
+              <a href="works/amritsar-railway.html" class="ledger-pill">View Brief <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2.5 8.5L8.5 2.5M8.5 2.5H4M8.5 2.5V7" stroke="currentColor" stroke-width="1.2"/></svg></a>
             </div>
           </article>
 
-          <!-- BLOCK 07 -->
-          <article class="ledger-cell ledger-cell--data reveal-row" data-reveal data-cursor="view" data-cursor-text="Brief">
-            <div class="bp-grid bp-grid--cell" aria-hidden="true"></div>
-            <div class="relative z-10">
-              <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest2 text-beige/80 mb-5">
-                <span>Index 07 — Confidential</span>
-                <span class="px-2 py-0.5 rounded-full border border-beige/30">NDA</span>
-              </div>
-              <h3 class="font-display text-2xl sm:text-3xl mb-6">Project Axiom</h3>
-              <dl class="data-sheet">
-                <div><dt>Typology</dt><dd>Corporate Campus</dd></div>
-                <div><dt>Location</dt><dd>Amsterdam, Netherlands</dd></div>
-                <div><dt>Scale</dt><dd>15,600 sqm</dd></div>
-                <div><dt>Phase</dt><dd>Construction Documentation</dd></div>
-                <div><dt>Spatial Scope</dt><dd>Office · Amenity · Landscape</dd></div>
-              </dl>
+          <!-- INDEX 07 — IRCON Office Building -->
+          <article class="ledger-cell ledger-cell--visual reveal-row" data-reveal data-cursor="view" data-cursor-text="View">
+            <div class="media-frame">
+              <img src="/images/7.png" alt="IRCON Office Building" class="media-img" loading="lazy" onerror="this.classList.add('media-img--failed')" />
             </div>
-            <div class="ledger-overlay ledger-overlay--data">
-              <a href="#" class="ledger-pill">
-                Request Briefing
-                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2.5 8.5L8.5 2.5M8.5 2.5H4M8.5 2.5V7" stroke="currentColor" stroke-width="1.2"/></svg>
-              </a>
+            <div class="ledger-overlay">
+              <div class="font-mono text-[10px] uppercase tracking-widest2 text-beige/80 mb-2">Index 07 — Commercial</div>
+              <h3 class="font-display text-xl sm:text-2xl mb-3">IRCON Office Building</h3>
+              <a href="works/ircon-office.html" class="ledger-pill">View Brief <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2.5 8.5L8.5 2.5M8.5 2.5H4M8.5 2.5V7" stroke="currentColor" stroke-width="1.2"/></svg></a>
             </div>
           </article>
 
-          <!-- BLOCK 08 -->
-          <article class="ledger-cell ledger-cell--data reveal-row" data-reveal data-cursor="view" data-cursor-text="Brief">
-            <div class="bp-grid bp-grid--cell" aria-hidden="true"></div>
-            <div class="relative z-10">
-              <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest2 text-beige/80 mb-5">
-                <span>Index 08 — Confidential</span>
-                <span class="px-2 py-0.5 rounded-full border border-beige/30">NDA</span>
-              </div>
-              <h3 class="font-display text-2xl sm:text-3xl mb-6">Project Veritas</h3>
-              <dl class="data-sheet">
-                <div><dt>Typology</dt><dd>Heritage Restoration</dd></div>
-                <div><dt>Location</dt><dd>Rotterdam, Netherlands</dd></div>
-                <div><dt>Scale</dt><dd>8,900 sqm</dd></div>
-                <div><dt>Phase</dt><dd>Design Development</dd></div>
-                <div><dt>Spatial Scope</dt><dd>Civic · Cultural · Heritage</dd></div>
-              </dl>
+          <!-- INDEX 08 — Navami Housing -->
+          <article class="ledger-cell ledger-cell--visual reveal-row" data-reveal data-cursor="view" data-cursor-text="View">
+            <div class="media-frame">
+              <img src="/images/8.png" alt="Navami Housing" class="media-img" loading="lazy" onerror="this.classList.add('media-img--failed')" />
             </div>
-            <div class="ledger-overlay ledger-overlay--data">
-              <a href="#" class="ledger-pill">
-                Request Briefing
-                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2.5 8.5L8.5 2.5M8.5 2.5H4M8.5 2.5V7" stroke="currentColor" stroke-width="1.2"/></svg>
-              </a>
+            <div class="ledger-overlay">
+              <div class="font-mono text-[10px] uppercase tracking-widest2 text-beige/80 mb-2">Index 08 — Residential</div>
+              <h3 class="font-display text-xl sm:text-2xl mb-3">Navami Housing</h3>
+              <a href="works/navami-housing.html" class="ledger-pill">View Brief <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2.5 8.5L8.5 2.5M8.5 2.5H4M8.5 2.5V7" stroke="currentColor" stroke-width="1.2"/></svg></a>
             </div>
           </article>
 
-          <!-- BLOCK 09 -->
-          <article class="ledger-cell ledger-cell--data reveal-row" data-reveal data-cursor="view" data-cursor-text="Brief">
-            <div class="bp-grid bp-grid--cell" aria-hidden="true"></div>
-            <div class="relative z-10">
-              <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest2 text-beige/80 mb-5">
-                <span>Index 09 — Confidential</span>
-                <span class="px-2 py-0.5 rounded-full border border-beige/30">NDA</span>
-              </div>
-              <h3 class="font-display text-2xl sm:text-3xl mb-6">Project Zenith</h3>
-              <dl class="data-sheet">
-                <div><dt>Typology</dt><dd>Mixed-Use Podium</dd></div>
-                <div><dt>Location</dt><dd>Hong Kong</dd></div>
-                <div><dt>Scale</dt><dd>35,200 sqm</dd></div>
-                <div><dt>Phase</dt><dd>SD → DD</dd></div>
-                <div><dt>Spatial Scope</dt><dd>Retail · F&amp;B · Service</dd></div>
-              </dl>
+          <!-- INDEX 09 — Suvarna Vilas -->
+          <article class="ledger-cell ledger-cell--visual reveal-row" data-reveal data-cursor="view" data-cursor-text="View">
+            <div class="media-frame">
+              <img src="/images/9.png" alt="Suvarna Vilas" class="media-img" loading="lazy" onerror="this.classList.add('media-img--failed')" />
             </div>
-            <div class="ledger-overlay ledger-overlay--data">
-              <a href="#" class="ledger-pill">
-                Request Briefing
-                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2.5 8.5L8.5 2.5M8.5 2.5H4M8.5 2.5V7" stroke="currentColor" stroke-width="1.2"/></svg>
-              </a>
-            </div>
-          </article>
-
-          <!-- BLOCK 10 -->
-          <article class="ledger-cell ledger-cell--data reveal-row" data-reveal data-cursor="view" data-cursor-text="Brief">
-            <div class="bp-grid bp-grid--cell" aria-hidden="true"></div>
-            <div class="relative z-10">
-              <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest2 text-beige/80 mb-5">
-                <span>Index 10 — Confidential</span>
-                <span class="px-2 py-0.5 rounded-full border border-beige/30">NDA</span>
-              </div>
-              <h3 class="font-display text-2xl sm:text-3xl mb-6">Project Indra</h3>
-              <dl class="data-sheet">
-                <div><dt>Typology</dt><dd>Civic Library</dd></div>
-                <div><dt>Location</dt><dd>Bangalore, India</dd></div>
-                <div><dt>Scale</dt><dd>12,400 sqm</dd></div>
-                <div><dt>Phase</dt><dd>Concept Design</dd></div>
-                <div><dt>Spatial Scope</dt><dd>Knowledge · Community · Public</dd></div>
-              </dl>
-            </div>
-            <div class="ledger-overlay ledger-overlay--data">
-              <a href="#" class="ledger-pill">
-                Request Briefing
-                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2.5 8.5L8.5 2.5M8.5 2.5H4M8.5 2.5V7" stroke="currentColor" stroke-width="1.2"/></svg>
-              </a>
+            <div class="ledger-overlay">
+              <div class="font-mono text-[10px] uppercase tracking-widest2 text-beige/80 mb-2">Index 09 — Residential</div>
+              <h3 class="font-display text-xl sm:text-2xl mb-3">Suvarna Vilas</h3>
+              <a href="works/suvarna-vilas.html" class="ledger-pill">View Brief <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2.5 8.5L8.5 2.5M8.5 2.5H4M8.5 2.5V7" stroke="currentColor" stroke-width="1.2"/></svg></a>
             </div>
           </article>
 
@@ -467,9 +325,9 @@
     <!-- SECTION IV — REACH ME OUT FOOTER                          -->
     <!-- ======================================================= -->
     <footer id="contact" class="relative px-5 sm:px-8 lg:px-12 pt-24 pb-10 sm:pt-32 overflow-hidden">
-      <div class="footer-media" data-img-fallback>
+      <div class="footer-media">
         <img
-          src="https://picsum.photos/seed/studio-section-sketch/1920/1080"
+          src="/images/port.png"
           alt=""
           aria-hidden="true"
           loading="lazy"
