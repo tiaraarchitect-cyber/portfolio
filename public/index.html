@@ -374,6 +374,7 @@
 
   <script type="module" src="js/main.js"></script>
   <script>
+    /* ── Card click-through ───────────────────────────────────────── */
     document.querySelectorAll('.ledger-cell--visual').forEach(function(card) {
       var link = card.querySelector('.ledger-pill');
       if (!link) return;
@@ -383,6 +384,81 @@
         window.location.href = link.href;
       });
     });
+
+    /* ── Section scroll-drag parallax ────────────────────────────────
+       Hero section moves at 72 % of scroll speed so it appears to
+       "drag" behind as you scroll down — the next section feels like
+       it's pushing the current one away rather than hard-cutting.
+       Uses the same LERP (0.085) as smoothScroll.js so the motion
+       stays perfectly in sync with the existing smooth-scroll system.
+    ────────────────────────────────────────────────────────────────── */
+    (function () {
+      var hero   = document.getElementById('hero');
+      var skills = document.getElementById('skills');
+      var works  = document.getElementById('works');
+      if (!hero) return;
+
+      var px   = 0;          // lerped scroll value
+      var LERP = 0.085;      // must match smoothScroll.js
+
+      hero.style.willChange   = 'transform';
+      if (skills) skills.style.willChange = 'transform';
+      if (works)  works.style.willChange  = 'transform';
+
+      function slideReveal(section, px) {
+        if (!section) return;
+        var top     = section.offsetTop;
+        var entered = px - (top - window.innerHeight);
+        if (entered > 0) {
+          var rise = Math.max(0, 32 - entered * 0.18);
+          section.style.transform = 'translateY(' + rise + 'px)';
+        } else {
+          section.style.transform = 'translateY(32px)';
+        }
+      }
+
+      function tick() {
+        px += (window.scrollY - px) * LERP;
+
+        var heroH = hero.offsetHeight;
+
+        /* ── Hero drag ──
+           Positive translateY partially counters the container's upward
+           translate, so the hero rises slower = looks dragged downward. */
+        if (px < heroH * 1.4) {
+          var drag     = px * 0.28;
+          var progress = Math.min(1, px / heroH);
+          var sc       = 1 - progress * 0.025;
+          hero.style.transform = 'translateY(' + drag + 'px) scale(' + sc + ')';
+        } else {
+          hero.style.transform = '';
+        }
+
+        /* ── Skills: rise on entry → drag as works slides over it ── */
+        if (skills) {
+          var sTop      = skills.offsetTop;
+          var sEntered  = px - (sTop - window.innerHeight);
+          var sScrolled = px - sTop;
+          if (sScrolled > 0) {
+            /* Works is covering skills — same 28% counter-drag as hero */
+            skills.style.transform = 'translateY(' + (sScrolled * 0.28) + 'px)';
+          } else if (sEntered > 0) {
+            /* Skills entering viewport from below — quick rise */
+            var sRise = Math.max(0, 32 - sEntered * 0.18);
+            skills.style.transform = 'translateY(' + sRise + 'px)';
+          } else {
+            skills.style.transform = 'translateY(32px)';
+          }
+        }
+
+        /* ── Works: slides in at full speed to cover skills ── */
+        slideReveal(works, px);
+
+        requestAnimationFrame(tick);
+      }
+
+      requestAnimationFrame(tick);
+    })();
   </script>
 </body>
 </html>
