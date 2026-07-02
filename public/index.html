@@ -133,7 +133,7 @@
     <section id="skills" class="relative bg-olive px-5 sm:px-8 lg:px-12 py-24 sm:py-32">
       <div class="max-w-[1500px] mx-auto">
         <div class="reveal-row mb-14 sm:mb-20" data-reveal>
-          <h2 class="font-display text-[10vw] sm:text-6xl lg:text-7xl leading-[0.95]">The Structural<br class="hidden sm:block" /> Skill Set</h2>
+          <h2 class="font-display text-[10vw] sm:text-6xl lg:text-7xl leading-[0.95]">Skill Set</h2>
         </div>
 
         <div class="skill-accordion">
@@ -202,7 +202,7 @@
     <section id="works" class="relative px-5 sm:px-8 lg:px-12 py-24 sm:py-32">
       <div class="max-w-[1500px] mx-auto">
         <div class="reveal-row mb-14 sm:mb-16" data-reveal>
-          <h2 class="font-display text-[10vw] sm:text-6xl lg:text-7xl leading-[0.95]">Project</h2>
+          <h2 class="font-display text-[10vw] sm:text-6xl lg:text-7xl leading-[0.95]">Projects</h2>
         </div>
 
         <div class="ledger-scroll-wrap">
@@ -345,19 +345,19 @@
 
         <div class="reveal-row mt-10 sm:mt-14 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10" data-reveal>
           <div>
-            <a href="mailto:studio@anikarao.com" class="block font-mono text-lg sm:text-2xl text-white hover:text-beige transition-colors duration-300 underline underline-offset-4 decoration-white/20 hover:decoration-beige">
-              studio@anikarao.com
+            <a href="mailto:ar.tiara.raghuvanshi@gmail.com" class="block font-mono text-lg sm:text-2xl text-white hover:text-beige transition-colors duration-300 underline underline-offset-4 decoration-white/20 hover:decoration-beige">
+              ar.tiara.raghuvanshi@gmail.com
             </a>
             <p class="mt-3 font-mono text-[11px] sm:text-xs uppercase tracking-widest2 text-stone-400">
-              Mumbai, India — working internationally
+              Delhi — India
             </p>
           </div>
 
           <div class="flex items-center gap-3">
-            <a href="https://instagram.com" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram" data-cursor="text" data-cursor-text="IG">
+            <a href="https://instagram.com/tiarasteaparty" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram" data-cursor="text" data-cursor-text="IG">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.4"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.4"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor"/></svg>
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn" data-cursor="text" data-cursor-text="IN">
+            <a href="https://www.linkedin.com/in/ar-tiararaghuvanshi" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn" data-cursor="text" data-cursor-text="IN">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.4"/><path d="M7.5 10V17M7.5 7.2V7.21M11.5 17V13.2C11.5 11.5 12.4 10.5 13.8 10.5C15.1 10.5 16 11.4 16 13.2V17" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
             </a>
           </div>
@@ -373,5 +373,16 @@
   </div><!-- /#smooth-content -->
 
   <script type="module" src="js/main.js"></script>
+  <script>
+    document.querySelectorAll('.ledger-cell--visual').forEach(function(card) {
+      var link = card.querySelector('.ledger-pill');
+      if (!link) return;
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', function(e) {
+        if (e.target.closest('a')) return;
+        window.location.href = link.href;
+      });
+    });
+  </script>
 </body>
 </html>
